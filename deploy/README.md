@@ -1,6 +1,6 @@
 # gpt2api 容器化部署
 
-一键启动 = `docker compose up -d`。Server 启动时自动:
+一键启动 = `docker compose up -d`。`server` 默认会从 GHCR 拉取 `${SERVER_IMAGE:-ghcr.io/432539/gpt2api}:${SERVER_TAG:-latest}`，Server 启动时自动:
 
 1. 等 MySQL 健康
 2. 跑 `goose up` 应用所有迁移(包含用户表、账号池、审计、备份元数据等)
@@ -11,9 +11,18 @@
 ```bash
 cd deploy
 cp .env.example .env           # 修改 JWT_SECRET / CRYPTO_AES_KEY / MySQL 密码
-docker compose up -d --build
+docker compose up -d
 docker compose logs -f server  # 观察迁移 + 启动日志
 ```
+
+如果你 fork 了仓库，或者要固定某个版本镜像，可在 `.env` 中覆盖:
+
+```env
+SERVER_IMAGE=ghcr.io/你的 GitHub 用户名或组织名/gpt2api
+SERVER_TAG=latest   # 也可以换成 main / v1.2.3 / sha-xxxx
+```
+
+`SERVER_TAG=latest` 由 GitHub Actions 在默认分支推送时自动更新。若 GHCR 包仍是私有，请先 `docker login ghcr.io` 或把包可见性改成 public。
 
 默认暴露端口:
 
@@ -95,4 +104,3 @@ docker compose exec server mysqldump -hmysql -ugpt2api -p \
 - `server` 可直接 `docker compose up -d --scale server=3`(需前面加 nginx/traefik)
 - `backups` 卷改成共享存储(NFS / S3 fuse),否则每个副本只能看到自己创建的备份
 - Redis 分布式锁已天然支持多副本,MySQL 和 JWT 密钥需统一
-

@@ -1,0 +1,7 @@
+.git
+.github
+deploy/.env
+deploy/bin
+deploy/logs
+web/dist
+web/node_modules

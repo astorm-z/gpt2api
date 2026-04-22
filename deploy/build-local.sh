@@ -5,6 +5,10 @@
 #   bash deploy/build-local.sh            # 增量:只建缺失的 goose
 #   bash deploy/build-local.sh --force    # 强制重建 goose
 #
+# 说明:
+#   docker compose / GitHub Actions 已改为源码构建并发布远程镜像;
+#   本脚本仅保留给离线预构建或手工调试场景。
+#
 # 产物:
 #   deploy/bin/gpt2api        linux/amd64 可执行(后端)
 #   deploy/bin/goose          linux/amd64 可执行(迁移工具)

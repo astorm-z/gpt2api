@@ -2,6 +2,10 @@
 # 用法:
 #   powershell -NoProfile -File deploy/build-local.ps1          # 增量:只建缺失的 goose
 #   powershell -NoProfile -File deploy/build-local.ps1 -Force   # 强制重建 goose
+#
+# 说明:
+#   docker compose / GitHub Actions 已改为源码构建并发布远程镜像;
+#   本脚本仅保留给离线预构建或手工调试场景。
 
 param(
     [switch]$Force

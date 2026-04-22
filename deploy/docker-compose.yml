@@ -44,10 +44,8 @@ services:
       retries: 10
 
   server:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile
-    image: gpt2api/server:latest
+    image: ${SERVER_IMAGE:-ghcr.io/432539/gpt2api}:${SERVER_TAG:-latest}
+    pull_policy: always
     container_name: gpt2api-server
     restart: unless-stopped
     depends_on:
