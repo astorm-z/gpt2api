@@ -18,8 +18,8 @@ services:
       # 用 mysql_native_password 作为默认认证插件,兼容容器内
       # mariadb-client 附带的 mariadb-dump(无 caching_sha2_password 插件)。
       - --default-authentication-plugin=mysql_native_password
-    ports:
-      - "${MYSQL_PORT:-3306}:3306"
+    expose:
+      - "3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -33,8 +33,8 @@ services:
     container_name: gpt2api-redis
     restart: unless-stopped
     command: ["redis-server", "--appendonly", "yes"]
-    ports:
-      - "${REDIS_PORT:-6379}:6379"
+    expose:
+      - "6379"
     volumes:
       - redis_data:/data
     healthcheck:

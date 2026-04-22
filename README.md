@@ -206,6 +206,8 @@ cp .env.example .env
 
 默认 `server` 镜像为 `ghcr.io/astorm-z/gpt2api:latest`，由 GitHub Actions 在 `main` 分支推送后自动构建并发布。fork 仓库或想固定版本时，可在 `.env` 中覆盖 `SERVER_IMAGE` / `SERVER_TAG`。
 
+默认只有 `server:8080` 会暴露到宿主机；`mysql` 和 `redis` 仅在 Docker 内部网络可见，因此不会占用宿主机的 `3306` / `6379`。
+
 **必改** `.env` 中的三项:
 
 ```env

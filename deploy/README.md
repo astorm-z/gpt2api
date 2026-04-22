@@ -30,8 +30,8 @@ SERVER_TAG=latest   # 也可以换成 main / v1.2.3 / sha-xxxx
 | 服务     | 端口     | 说明                   |
 | ------ | ------ | -------------------- |
 | server | `8080` | OpenAI 兼容网关 + 后台 API |
-| mysql  | `3306` | 业务数据库                |
-| redis  | `6379` | 锁 / 限流 / 缓存          |
+
+`mysql` 和 `redis` 默认仅在 Docker 内部网络可见，不向宿主机暴露端口，因此不会与宿主机已有的 MySQL / Redis 冲突。`server` 通过服务名 `mysql:3306`、`redis:6379` 直接访问它们。
 
 
 ## 目录与数据卷
