@@ -4,17 +4,28 @@ ARG GO_VERSION=1.26.1
 ARG NODE_VERSION=20
 
 FROM --platform=$BUILDPLATFORM golang:${GO_VERSION}-alpine AS goose-builder
+ARG GO_VERSION
 ARG TARGETOS
 ARG TARGETARCH
 
 RUN apk add --no-cache ca-certificates git
 
 ENV CGO_ENABLED=0
-WORKDIR /src
+WORKDIR /tmp/goose-builder
+
+RUN cat <<EOF > go.mod
+module goose-builder
+
+go ${GO_VERSION}
+
+require github.com/pressly/goose/v3 v3.20.0
+EOF
+
+RUN go mod download
 
 RUN mkdir -p /out \
-    && GOBIN=/out GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
-    go install github.com/pressly/goose/v3/cmd/goose@v3.20.0
+    && GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=0 \
+    go build -trimpath -ldflags "-s -w" -o /out/goose github.com/pressly/goose/v3/cmd/goose
 
 FROM --platform=$BUILDPLATFORM golang:${GO_VERSION}-alpine AS app-builder
 ARG TARGETOS
