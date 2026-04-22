@@ -15,6 +15,8 @@ docker compose up -d
 docker compose logs -f server  # 观察迁移 + 启动日志
 ```
 
+首次部署不会预置默认管理员账号；当数据库里还没有用户时，第一个注册成功的账号会自动成为超管(admin)。
+
 如果你 fork 了仓库，或者要固定某个版本镜像，可在 `.env` 中覆盖:
 
 ```env
