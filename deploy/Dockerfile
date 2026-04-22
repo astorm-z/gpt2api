@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-ARG GO_VERSION=1.22
+ARG GO_VERSION=1.26.1
 ARG NODE_VERSION=20
 
 FROM --platform=$BUILDPLATFORM golang:${GO_VERSION}-alpine AS goose-builder
