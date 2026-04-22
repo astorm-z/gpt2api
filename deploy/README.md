@@ -1,6 +1,6 @@
 # gpt2api 容器化部署
 
-一键启动 = `docker compose up -d`。`server` 默认会从 GHCR 拉取 `${SERVER_IMAGE:-ghcr.io/432539/gpt2api}:${SERVER_TAG:-latest}`，Server 启动时自动:
+一键启动 = `docker compose up -d`。`server` 默认会从 GHCR 拉取 `${SERVER_IMAGE:-ghcr.io/astorm-z/gpt2api}:${SERVER_TAG:-latest}`，Server 启动时自动:
 
 1. 等 MySQL 健康
 2. 跑 `goose up` 应用所有迁移(包含用户表、账号池、审计、备份元数据等)

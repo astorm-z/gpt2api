@@ -204,7 +204,7 @@ cd gpt2api/deploy
 cp .env.example .env
 ```
 
-默认 `server` 镜像为 `ghcr.io/432539/gpt2api:latest`，由 GitHub Actions 在 `main` 分支推送后自动构建并发布。fork 仓库或想固定版本时，可在 `.env` 中覆盖 `SERVER_IMAGE` / `SERVER_TAG`。
+默认 `server` 镜像为 `ghcr.io/astorm-z/gpt2api:latest`，由 GitHub Actions 在 `main` 分支推送后自动构建并发布。fork 仓库或想固定版本时，可在 `.env` 中覆盖 `SERVER_IMAGE` / `SERVER_TAG`。
 
 **必改** `.env` 中的三项:
 
